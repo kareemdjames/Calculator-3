@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alt Calculator 3</title>
+</head>
+<style type="text/css">
+  body {
+    background-image: url(img/c41x1.jpg);
+    background-repeat: no-repeat;
+  }
+  form {
+    background: lightGray;
+  }
+  
+  input[type=button] {
+    position: relative;
+    width: 20%;
+    height: 15%;
+    font-size: 20px;
+    font-weight: 900;
+    background-color: #242625;
+    border-radius: 4px;
+  }
+  input[type=button]:hover {
+    color: white;
+    box-shadow: 10px 10px 5px #888888;
+    transform: translate(0px, -10px);
+  }
+  input[name=answer] {
+    height: 40px;
+    width: 400px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: right;
+    font-size: 20px;
+    background-color: #7C845F;
+  }
+  #output {
+    position: absolute;
+    height: 20px;
+    width: 400px;
+    margin-left: 713px;
+    margin-top: 325px;
+  }
+  #body {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    margin-top: 460px;
+    margin-left: 700px;
+  }
+  .lightBar {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 630px;
+    display: flex;
+    height: 30px;
+    width: 490px;
+    background-color: grey;
+    justify-content: center;
+    border: 1px solid black;
+  }
+  .light {
+    flex: 1;
+    justify-content: space-around;
+    background-color: red;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+  #green {
+    background-color: green;
+  }
+</style>
+
+<body>
+
+  <form name="calculator">
+    <div id="output">
+      <input id="results" type="text" name="answer">
+    </div>
+    <div id="body">
+      <input type="button" name="avg" value="avg" onclick="average(); playSound()">
+      <input type="button" value="c" onclick="parent.calculator.answer.value = ''" >
+      <br>
+      <input type="button" value="1" onclick="parent.calculator.answer.value += '1'; playSound()" >
+      <input type="button" value="2" onclick="parent.calculator.answer.value += '2'; playSound()" >
+      <input type="button" value="3" onclick="parent.calculator.answer.value += '3'; playSound()" >
+      <input type="button" value="+" onclick="parent.calculator.answer.value += '+'; playSound()" >
+      <input type="button" value="4" onclick="parent.calculator.answer.value += '4'; playSound()" >
+      <input type="button" value="5" onclick="parent.calculator.answer.value += '5'; playSound()" >
+      <input type="button" value="6" onclick="parent.calculator.answer.value += '6'; playSound()" >
+      <input type="button" value="-" onclick="parent.calculator.answer.value += '-'; playSound()" >
+      <input type="button" value="7" onclick="parent.calculator.answer.value += '7'; playSound()" >
+      <input type="button" value="8" onclick="parent.calculator.answer.value += '8'; playSound()" >
+      <input type="button" value="9" onclick="parent.calculator.answer.value += '9'; playSound()" >
+      <input type="button" value="x" onclick="parent.calculator.answer.value += '*'; playSound()" >
+      <input type="button" value="." onclick="parent.calculator.answer.value += '.'; playSound()" >
+      <input type="button" value="0" onclick="parent.calculator.answer.value += '0'; playSound()" >
+      <input type="button" value="=" onclick="parent.calculator.answer.value = eval(calculator.answer.value)">
+      <input type="button" value="/" onclick="parent.calculator.answer.value += '/'" >
+    </div>
+  </form>
+<!--   light bar that was supposed to toggle lights on and off while you use the calculator  
+ --><div class="lightBar"> 
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light" id="green"></div>
+    <div class="light"></div>
+    <div class="light" id="green"></div>
+    <div class="light" id="green"></div>
+  </div>
+
+  <audio id="audio" src="audio/single_shot.ogg"></audio>
+<!--  function to play a sound from the audio element
+ -->  <script type="text/javascript">
+    function playSound() {
+      var sound = document.getElementById("audio");
+      sound.play()
+  }
+  </script>
+
+<script type="text/javascript">
+  // avg function that grabs the value in the results input (I was watching while Syed and Adyanna were walking through this step by step)
+  function average() {
+    let arr = []; 
+    let newArr = [];
+    let result = 0;
+      // console.log(arr);
+    arr = document.getElementById('results').value; //grab current contents of output
+    arr = arr.split('+'); //split output vales at the plus sign
+      // console.log(arr);
+    for (let i=0;i<arr.length;i++) {
+      newArr[i] = parseInt(arr[i], 10); //loop through each string in array and place into newArr
+        result += newArr[i] // add every number in newArr and place in result var
+      }
+      result  = result / newArr.length; //div result number by newArr length to get average
+      document.getElementById('results').value = result; //log ansers into output screen for user
+  }
+</script>
+</body>
+</html>
